@@ -9,7 +9,8 @@ namespace CbIntegrator.UI
 {
 	internal static class Program
 	{
-		static MainFormFactory factory;
+		static MainFormFactory mainFactory;
+		static RegistrationFormFactory registrationFactory;
 		static ApplicationContext context;
 
 		/// <summary>
@@ -19,27 +20,22 @@ namespace CbIntegrator.UI
 		static void Main()
 		{
 			context = new ApplicationContext();
-			factory = new MainFormFactory(context);
-			//var config = ReadConfiguration();
+			mainFactory = new MainFormFactory(context);
+			
+
 			var dbOptions = new DbOptions { ConnectionString = System.Configuration.ConfigurationManager.
 											ConnectionStrings["MySqLConnectionString"].ConnectionString };
-				//config.GetConnectionString("db")! };
+			var service = new UsersService(new UsersRepository(dbOptions));
+			registrationFactory = new RegistrationFormFactory(context, mainFactory, service);
+
+
 			// To customize application configuration such as set high DPI settings or default font,
 			// see https://aka.ms/applicationconfiguration.
 			ApplicationConfiguration.Initialize();
 			
-			var login = new LoginForm(factory, new UsersService(new UsersRepository(dbOptions)));
+			var login = new LoginForm(mainFactory,registrationFactory, service);
 			context.MainForm = login;
 			Application.Run(context);			
 		}
-
-		/*private static IConfiguration ReadConfiguration()
-		{
-			var config = new ConfigurationBuilder()
-					 .AddJsonFile("appsettings.json", false)
-					 .Build();
-
-			return config;
-		}*/
 	}
 }

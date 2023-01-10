@@ -15,11 +15,13 @@ namespace CbIntegrator.UI.Froms
 	public partial class LoginForm : Form
 	{
 		private readonly IMainFormFactory mainFormFactory;
+		private readonly IRegistrationFormFactory registrationFormFactory;
 		private readonly IUsersService usersService;
 
-		public LoginForm(IMainFormFactory mainFormFactory, IUsersService usersService)
+		public LoginForm(IMainFormFactory mainFormFactory,IRegistrationFormFactory registrationFormFactory, IUsersService usersService)
 		{
 			InitializeComponent();
+			this.registrationFormFactory = registrationFormFactory;
 			this.mainFormFactory = mainFormFactory;
 			this.usersService = usersService;
 		}
@@ -39,5 +41,12 @@ namespace CbIntegrator.UI.Froms
 				MessageBox.Show("Не нашли пользователя");
 			}
 		}
-	}
+
+        private void registrationLkLbl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+			var form = registrationFormFactory.Create();
+			form.Show();
+			this.Close();
+        }
+    }
 }
