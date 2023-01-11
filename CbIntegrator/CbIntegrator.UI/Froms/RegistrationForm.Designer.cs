@@ -28,12 +28,53 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.loginTb = new System.Windows.Forms.TextBox();
+            this.passwordTb = new System.Windows.Forms.TextBox();
+            this.registartionBtn = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // loginTb
+            // 
+            this.loginTb.Location = new System.Drawing.Point(126, 102);
+            this.loginTb.Name = "loginTb";
+            this.loginTb.Size = new System.Drawing.Size(209, 27);
+            this.loginTb.TabIndex = 0;
+            // 
+            // passwordTb
+            // 
+            this.passwordTb.Location = new System.Drawing.Point(126, 183);
+            this.passwordTb.Name = "passwordTb";
+            this.passwordTb.Size = new System.Drawing.Size(209, 27);
+            this.passwordTb.TabIndex = 1;
+            // 
+            // registartionBtn
+            // 
+            this.registartionBtn.Location = new System.Drawing.Point(168, 265);
+            this.registartionBtn.Name = "registartionBtn";
+            this.registartionBtn.Size = new System.Drawing.Size(123, 29);
+            this.registartionBtn.TabIndex = 2;
+            this.registartionBtn.Text = "Регистрация";
+            this.registartionBtn.UseVisualStyleBackColor = true;
+            // 
+            // RegistrationForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "RegistrationForm";
+            this.ClientSize = new System.Drawing.Size(457, 407);
+            this.Controls.Add(this.registartionBtn);
+            this.Controls.Add(this.passwordTb);
+            this.Controls.Add(this.loginTb);
+            this.Name = "RegistrationForm";
+            this.Text = "Регистрация";
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
+
+        private TextBox loginTb;
+        private TextBox passwordTb;
+        private Button registartionBtn;
     }
 }

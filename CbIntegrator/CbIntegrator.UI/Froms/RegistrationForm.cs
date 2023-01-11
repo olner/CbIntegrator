@@ -14,12 +14,12 @@ namespace CbIntegrator.UI.Froms
 {
     public partial class RegistrationForm : Form
     {
-        private readonly IRegistrationFormFactory registrationFormFactory;
+        private readonly IMainFormFactory mainFormFactory;
         private readonly IUsersService usersService;
         public RegistrationForm(IMainFormFactory mainFormFactory, IUsersService usersService)
         {
             InitializeComponent();
-            this.registrationFormFactory = registrationFormFactory;
+            this.mainFormFactory = mainFormFactory;
             this.usersService = usersService;
         }
     }

@@ -17,10 +17,4 @@
     <ProjectReference Include="..\CbIntegrator.Bussynes\CbIntegrator.Bussynes.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="appsettings.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>
