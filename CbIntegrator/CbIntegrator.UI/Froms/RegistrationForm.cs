@@ -1,4 +1,5 @@
-﻿using CbIntegrator.Bussynes.Services;
+﻿using CbIntegrator.Bussynes.Exceptions;
+using CbIntegrator.Bussynes.Services;
 using CbIntegrator.UI.Engine;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,22 @@ namespace CbIntegrator.UI.Froms
             InitializeComponent();
             this.mainFormFactory = mainFormFactory;
             this.usersService = usersService;
+        }
+
+        private void RegistartionBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var user = usersService.Register(loginTb.Text, passwordTb.Text);
+            }
+            catch(ServiceException)
+            {
+                MessageBox.Show("Такой пользователь уже есть");
+                return;
+            }
+            var form = mainFormFactory.Create();
+            form.Show();
+            this.Close();
         }
     }
 }

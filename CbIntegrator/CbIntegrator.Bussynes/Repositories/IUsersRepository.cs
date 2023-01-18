@@ -13,5 +13,6 @@ namespace CbIntegrator.Bussynes.Repositories
 		/// <returns></returns>
 		User GetUser(string login, string password);
 		  User Register(string login, string password);
+		bool IsUserExists(string login);
 	}
 }

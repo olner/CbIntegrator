@@ -32,11 +32,22 @@ namespace CbIntegrator.Bussynes.Services
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="username"></param>
+		/// <param name="password"></param>
+
+		/// <returns></returns>
 		public User? Register(string username, string password)
 		{
+            if (repository.IsUserExists(username))
+            {
+				throw new ServiceException("Такой пользователь уже есть");
+            }
 			try
 			{
-				if(password is not { Length: > 6 } x || !x.Contains("!"))
+				if(password is not { Length: > 6 } x || x.Contains("!"))
 				{
 					throw new ServiceException("");
 				}

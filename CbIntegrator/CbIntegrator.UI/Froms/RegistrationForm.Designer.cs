@@ -30,7 +30,7 @@
         {
             this.loginTb = new System.Windows.Forms.TextBox();
             this.passwordTb = new System.Windows.Forms.TextBox();
-            this.registartionBtn = new System.Windows.Forms.Button();
+            this.RegistartionBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // loginTb
@@ -47,21 +47,22 @@
             this.passwordTb.Size = new System.Drawing.Size(209, 27);
             this.passwordTb.TabIndex = 1;
             // 
-            // registartionBtn
+            // RegistartionBtn
             // 
-            this.registartionBtn.Location = new System.Drawing.Point(168, 265);
-            this.registartionBtn.Name = "registartionBtn";
-            this.registartionBtn.Size = new System.Drawing.Size(123, 29);
-            this.registartionBtn.TabIndex = 2;
-            this.registartionBtn.Text = "Регистрация";
-            this.registartionBtn.UseVisualStyleBackColor = true;
+            this.RegistartionBtn.Location = new System.Drawing.Point(168, 265);
+            this.RegistartionBtn.Name = "RegistartionBtn";
+            this.RegistartionBtn.Size = new System.Drawing.Size(123, 29);
+            this.RegistartionBtn.TabIndex = 2;
+            this.RegistartionBtn.Text = "Регистрация";
+            this.RegistartionBtn.UseVisualStyleBackColor = true;
+            this.RegistartionBtn.Click += new System.EventHandler(this.RegistartionBtn_Click);
             // 
             // RegistrationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(457, 407);
-            this.Controls.Add(this.registartionBtn);
+            this.Controls.Add(this.RegistartionBtn);
             this.Controls.Add(this.passwordTb);
             this.Controls.Add(this.loginTb);
             this.Name = "RegistrationForm";
@@ -75,6 +76,6 @@
 
         private TextBox loginTb;
         private TextBox passwordTb;
-        private Button registartionBtn;
+        private Button RegistartionBtn;
     }
 }
