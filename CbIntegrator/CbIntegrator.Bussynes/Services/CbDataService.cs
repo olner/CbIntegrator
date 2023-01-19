@@ -9,17 +9,20 @@ using System.Xml.Linq;
 
 namespace CbIntegrator.Bussynes.Services
 {
+    /// <summary>
+    /// Класс для работы с Веб Сервисом DailyInfo ЦБ РФ
+    /// </summary>
     public class CbDataService
     {
         CbService.DailyInfoSoapClient service = new CbService.DailyInfoSoapClient(CbService.DailyInfoSoapClient.EndpointConfiguration.DailyInfoSoap);
-        public DataTable GetCurs()
+        /// <summary>
+        /// Возвращает курс на сегодняшний день в ввиде DataTable
+        /// </summary>
+        /// <returns>DataTable</returns>
+        public DataTable GetTodayCurs()
         {
-            var service = new CbService.DailyInfoSoapClient(CbService.DailyInfoSoapClient.EndpointConfiguration.DailyInfoSoap12);
-            var curse = service.GetCursOnDate(DateTime.Now);
-            var nodes = curse.Nodes;
-            var dt = XElementExtensions.ToDataTable(nodes);
-            return dt;
-            
+            //var service = new CbService.DailyInfoSoapClient(CbService.DailyInfoSoapClient.EndpointConfiguration.DailyInfoSoap12);
+            return XElementExtensions.ToDataTable(service.GetCursOnDate(DateTime.Now).Nodes);
         }
     }
 }

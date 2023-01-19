@@ -32,9 +32,11 @@
             this.courseTabPage = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.settingsTabPage = new System.Windows.Forms.TabPage();
+            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.tabControl1.SuspendLayout();
             this.courseTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.settingsTabPage.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -70,6 +72,7 @@
             // 
             // settingsTabPage
             // 
+            this.settingsTabPage.Controls.Add(this.checkedListBox1);
             this.settingsTabPage.Location = new System.Drawing.Point(4, 29);
             this.settingsTabPage.Name = "settingsTabPage";
             this.settingsTabPage.Padding = new System.Windows.Forms.Padding(3);
@@ -77,6 +80,14 @@
             this.settingsTabPage.TabIndex = 1;
             this.settingsTabPage.Text = "Настройки";
             this.settingsTabPage.UseVisualStyleBackColor = true;
+            // 
+            // checkedListBox1
+            // 
+            this.checkedListBox1.FormattingEnabled = true;
+            this.checkedListBox1.Location = new System.Drawing.Point(6, 50);
+            this.checkedListBox1.Name = "checkedListBox1";
+            this.checkedListBox1.Size = new System.Drawing.Size(756, 334);
+            this.checkedListBox1.TabIndex = 0;
             // 
             // MainForm
             // 
@@ -90,6 +101,7 @@
             this.tabControl1.ResumeLayout(false);
             this.courseTabPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.settingsTabPage.ResumeLayout(false);
             this.ResumeLayout(false);
 
 		}
@@ -100,5 +112,6 @@
         private TabPage courseTabPage;
         private TabPage settingsTabPage;
         private DataGridView dataGridView1;
+        private CheckedListBox checkedListBox1;
     }
 }

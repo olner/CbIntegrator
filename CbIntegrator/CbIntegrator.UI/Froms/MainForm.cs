@@ -10,8 +10,9 @@ namespace CbIntegrator.UI
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            checkedListBox1.MultiColumn = true;
             var service = new CbDataService();
-            var ds = service.GetCurs();
+            var ds = service.GetTodayCurs();
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.AutoGenerateColumns = true;
             dataGridView1.DataSource = ds;

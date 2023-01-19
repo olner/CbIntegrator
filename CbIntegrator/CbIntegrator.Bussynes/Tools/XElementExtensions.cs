@@ -8,6 +8,9 @@ using System.Xml.Linq;
 
 namespace CbIntegrator.Bussynes.Tools
 {
+    /// <summary>
+    /// Класс для преобразования XElement
+    /// </summary>
     public static class XElementExtensions
     {
         public static DataTable ToDataTable(this XElement element)
