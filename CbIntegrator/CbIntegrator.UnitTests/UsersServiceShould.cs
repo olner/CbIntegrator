@@ -40,7 +40,12 @@ namespace CbIntegrator.UnitTests
 				throw new Exception();
 			}
 
-			public User Register(string login, string password)
+            public bool IsUserExists(string login)
+            {
+                throw new NotImplementedException();
+            }
+
+            public User Register(string login, string password)
 			{
 				throw new NotImplementedException();
 			}

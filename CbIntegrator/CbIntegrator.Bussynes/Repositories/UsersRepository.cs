@@ -1,9 +1,11 @@
 ﻿using CbIntegrator.Bussynes.Exceptions;
 using CbIntegrator.Bussynes.Models;
 using CbIntegrator.Bussynes.Options;
+using CbIntegrator.DbContexts;
 using MySqlConnector;
 using System.Data.Common;
 using System.Data.SqlClient;
+using System.Diagnostics;
 
 namespace CbIntegrator.Bussynes.Repositories
 {
@@ -16,82 +18,53 @@ namespace CbIntegrator.Bussynes.Repositories
 		/// <inheritdoc/>
 		public User GetUser(string login, string password)
 		{
-			var user = Execute(c => GetUserInternal(c, login, password));
+			var user = GetUserInternal(login, password);
 			return user;
 		}
 		/// <inheritdoc/>
 		public User Register(string login, string password)
 		{
-			var user = Execute(c => RegisterInternal(c, login, password));
+			var user = Execute(c => RegisterInternal(login, password));
 			return user;
 		}
 		/// <inheritdoc/>
 		public bool IsUserExists(string login)
         {
-			var result = Execute(c => ISUserExistsInternal(c, login));
+			var result = Execute(c => ISUserExistsInternal(login));
 			return result;
         }
 
-		private User RegisterInternal(DbConnection sqlConnection, string login, string password)
+		private User RegisterInternal(string login, string password)
 		{
-			using var cmd = new MySqlCommand(@$"
-					insert into users(id, login, password)
-					value(@id, @login, @password)",
-					  (MySqlConnection)sqlConnection);
-
-			cmd.Parameters.AddWithValue("id", Guid.NewGuid());
-			cmd.Parameters.AddWithValue("login", login);
-			cmd.Parameters.AddWithValue("password", password);
-			cmd.Connection.Open();
-			cmd.ExecuteNonQuery();
-			cmd.Connection.Close();
-			return GetUserInternal(sqlConnection, login, password);
+			using var context = new CbIntegratorDbContextFactory().CreateDbContext(null);
+			UsersTable user = new UsersTable();
+			user.Id = Guid.NewGuid().ToString();
+			user.Login = login;
+			user.Password = password;
+			return GetUserInternal(login, password);
 		}
-		private bool ISUserExistsInternal(DbConnection sqlConnection, string login)
-        {
-			using var cmd = new MySqlCommand(@$"
-					select 
-						login
-					from 
-						users 
-					where 
-						login = @login",
-					  (MySqlConnection)sqlConnection);
-			cmd.Parameters.AddWithValue("login", login);
-			cmd.Connection.Open();
-			using var reader = cmd.ExecuteReader();
-            if (reader.Read())
-            {
-				cmd.Connection.Close();
-				return true;
-            }
-			cmd.Connection.Close();
-			return false;
-        }
-		private User GetUserInternal(DbConnection sqlConnection, string login, string password)
-		{
-			using var cmd = new MySqlCommand(@$"
-					select 
-						login, password
-					from 
-						users 
-					where 
-						login = @login and 
-						password = @password",
-					  (MySqlConnection)sqlConnection);
 
-			cmd.Parameters.AddWithValue("login", login);
-			cmd.Parameters.AddWithValue("password", password);
-			cmd.Connection.Open();
-			using var reader = cmd.ExecuteReader();
-			if (!reader.Read())
+		private bool ISUserExistsInternal(string login)
+		{
+			using var context = new CbIntegratorDbContextFactory().CreateDbContext(null);
+			var users = context.Users.Where(p => p.Login == login ).FirstOrDefault();
+			if (users != null)
 			{
+				return true;
+			}
+			return false;
+		}
+		private User GetUserInternal(string login, string password)
+		{
+			using var context = new CbIntegratorDbContextFactory().CreateDbContext(null);
+			var users =  context.Users.Where(p=>p.Login == login && p.Password == password).FirstOrDefault();
+			if(users == null)
+            {
 				throw new UserNotFoundException();
 			}
 			var user = new User();
-			user.Login = reader.GetString(0);
-			user.Password = reader.GetString(1);
-			cmd.Connection.Close();
+			user.Password = users.Password;
+			user.Login = users.Login;
 			return user;
 		}
 	}
