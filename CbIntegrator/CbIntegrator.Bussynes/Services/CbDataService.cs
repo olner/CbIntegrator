@@ -1,20 +1,16 @@
 ﻿using CbIntegrator.Bussynes.Tools;
-using System;
-using System.Collections.Generic;
+using CbIntegrator.Bussynes.Exceptions.CbServiceExceptions;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+
 
 namespace CbIntegrator.Bussynes.Services
 {
     /// <summary>
     /// Класс для работы с Веб Сервисом DailyInfo ЦБ РФ
     /// </summary>
-    public class CbDataService
+    public class CbDataService : ICbDataService
     {
-        CbService.DailyInfoSoapClient service = new CbService.DailyInfoSoapClient(CbService.DailyInfoSoapClient.EndpointConfiguration.DailyInfoSoap);
+        readonly CbService.DailyInfoSoapClient service = new(CbService.DailyInfoSoapClient.EndpointConfiguration.DailyInfoSoap);
         /// <summary>
         /// Возвращает курс на сегодняшний день в ввиде DataTable
         /// </summary>
@@ -22,7 +18,16 @@ namespace CbIntegrator.Bussynes.Services
         public DataTable GetTodayCurs()
         {
             //var service = new CbService.DailyInfoSoapClient(CbService.DailyInfoSoapClient.EndpointConfiguration.DailyInfoSoap12);
-            return XElementExtensions.ToDataTable(service.GetCursOnDate(DateTime.Now).Nodes);
+            try
+            {
+                return XElementExtensions.ToDataTable(service.GetCursOnDate(DateTime.Now).Nodes);
+            }
+            catch
+            {
+                throw new NoConnectionException();
+            }
+
+            return null;
         }
     }
 }

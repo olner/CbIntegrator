@@ -46,7 +46,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(776, 426);
+            this.tabControl1.Size = new System.Drawing.Size(898, 511);
             this.tabControl1.TabIndex = 0;
             // 
             // courseTabPage
@@ -55,7 +55,7 @@
             this.courseTabPage.Location = new System.Drawing.Point(4, 29);
             this.courseTabPage.Name = "courseTabPage";
             this.courseTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.courseTabPage.Size = new System.Drawing.Size(768, 393);
+            this.courseTabPage.Size = new System.Drawing.Size(890, 478);
             this.courseTabPage.TabIndex = 0;
             this.courseTabPage.Text = "Курс";
             this.courseTabPage.UseVisualStyleBackColor = true;
@@ -76,7 +76,7 @@
             this.settingsTabPage.Location = new System.Drawing.Point(4, 29);
             this.settingsTabPage.Name = "settingsTabPage";
             this.settingsTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.settingsTabPage.Size = new System.Drawing.Size(768, 393);
+            this.settingsTabPage.Size = new System.Drawing.Size(890, 478);
             this.settingsTabPage.TabIndex = 1;
             this.settingsTabPage.Text = "Настройки";
             this.settingsTabPage.UseVisualStyleBackColor = true;
@@ -84,7 +84,7 @@
             // checkedListBox1
             // 
             this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Location = new System.Drawing.Point(6, 50);
+            this.checkedListBox1.Location = new System.Drawing.Point(0, 3);
             this.checkedListBox1.Name = "checkedListBox1";
             this.checkedListBox1.Size = new System.Drawing.Size(756, 334);
             this.checkedListBox1.TabIndex = 0;
@@ -93,7 +93,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(916, 535);
             this.Controls.Add(this.tabControl1);
             this.Name = "MainForm";
             this.Text = "Главная форма";

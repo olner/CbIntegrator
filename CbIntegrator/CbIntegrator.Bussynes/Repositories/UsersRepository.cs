@@ -9,9 +9,9 @@ using System.Diagnostics;
 
 namespace CbIntegrator.Bussynes.Repositories
 {
-	public class UsersRepository : DbConnector, IUsersRepository
+	public class UsersRepository : IUsersRepository
 	{
-		public UsersRepository(DbOptions configuration) : base(configuration)
+		public UsersRepository()
 		{
 		}
 
@@ -24,13 +24,13 @@ namespace CbIntegrator.Bussynes.Repositories
 		/// <inheritdoc/>
 		public User Register(string login, string password)
 		{
-			var user = Execute(c => RegisterInternal(login, password));
+			var user = RegisterInternal(login, password);
 			return user;
 		}
 		/// <inheritdoc/>
 		public bool IsUserExists(string login)
         {
-			var result = Execute(c => ISUserExistsInternal(login));
+			var result = ISUserExistsInternal(login);
 			return result;
         }
 
