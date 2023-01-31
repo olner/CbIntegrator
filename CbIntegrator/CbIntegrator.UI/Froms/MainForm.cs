@@ -7,20 +7,20 @@ using CbIntegrator.Bussynes.Repositories;
 
 namespace CbIntegrator.UI
 {
-	public partial class MainForm : Form
-	{
-        
-        private readonly CbDataService service = new();
+    public partial class MainForm : Form
+    {
+
+        private readonly ICbDataService service;
         private readonly IUsersRepository repository;
         DataTable curs = new();
         bool dontRunHandler = true;
-        private List<string> settings;
 
-        public MainForm(IUsersRepository repository)
-		{
-			InitializeComponent();
+        public MainForm(IUsersRepository repository,ICbDataService service)
+        {
+            InitializeComponent();
             this.repository = repository;
-		}
+            this.service = service;
+        }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
@@ -43,7 +43,8 @@ namespace CbIntegrator.UI
             this.BeginInvoke((MethodInvoker)delegate
             {
                 if (dontRunHandler) return;
-                if (e.NewValue == CheckState.Checked) {
+                if (e.NewValue == CheckState.Checked)
+                {
                     SetDataGrid(curs);
                     var items = checkedListBox1.Items;
                     repository.AddUserCurs(CurrentUser.Login, items[e.Index].ToString());
@@ -64,7 +65,7 @@ namespace CbIntegrator.UI
             newDt.Clear();
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.AutoGenerateColumns = true;
-            foreach(var a in checkedListBox1.CheckedItems)
+            foreach (var a in checkedListBox1.CheckedItems)
             {
                 foreach (DataRow row in curs.Rows)
                 {

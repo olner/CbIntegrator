@@ -49,7 +49,7 @@ namespace CbIntegrator.UI
 			{
 				var cbService = sp.GetRequiredService<ICbDataService>();
 				var repository = sp.GetRequiredService<IUsersRepository>();
-				return new MainForm(repository);
+				return new MainForm(repository,cbService);
 			});
 			services.AddTransient<RegistrationForm>(sp =>
 			{

@@ -8,11 +8,11 @@ namespace CbIntegrator.UI.Engine
 		
 		private Lazy<MainForm> _form;
 
-		public MainFormFactory(ApplicationContext context, IUsersRepository repository)
+		public MainFormFactory(ApplicationContext context, IUsersRepository repository, ICbDataService service)
 		{
 			_form = new Lazy<MainForm>(() =>
 			{
-				var form = new MainForm(repository);
+				var form = new MainForm(repository,service);
 				context.MainForm = form;
 				return form;
 			});	
