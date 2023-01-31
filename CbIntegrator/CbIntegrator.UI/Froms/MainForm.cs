@@ -33,7 +33,7 @@ namespace CbIntegrator.UI
             }
             else
             {
-                MessageBox.Show("Ошибка подключения к веб серивису");
+                MessageBox.Show("РћС€РёР±РєР° РїРѕРґРєР»СЋС‡РµРЅРёСЏ Рє РІРµР± СЃРµСЂРёРІРёСЃСѓ");
             }
 
         }
@@ -84,7 +84,7 @@ namespace CbIntegrator.UI
             checkedListBox1.Items.Clear();
             var userCurses = repository.GetUserCurse(CurrentUser.Login);
             var check = false;
-            //Боже какое пиво
+            //Р‘РѕР¶Рµ РєР°РєРѕРµ РїРёРІРѕ
             if (userCurses != null)
             {
                 for (var i = 0; i < curs.Rows.Count; i++)
