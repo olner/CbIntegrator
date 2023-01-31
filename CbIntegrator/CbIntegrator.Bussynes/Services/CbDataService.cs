@@ -26,8 +26,6 @@ namespace CbIntegrator.Bussynes.Services
             {
                 throw new NoConnectionException();
             }
-
-            return null;
         }
     }
 }

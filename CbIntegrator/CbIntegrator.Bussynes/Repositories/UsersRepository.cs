@@ -33,6 +33,11 @@ namespace CbIntegrator.Bussynes.Repositories
 			var result = ISUserExistsInternal(login);
 			return result;
         }
+		/// <inheritdoc/>
+		public List<string> GetUserCurse(string login)
+        {
+			return GetUserCurseInternal(login);
+        }
 
 		private User RegisterInternal(string login, string password)
 		{
@@ -41,6 +46,8 @@ namespace CbIntegrator.Bussynes.Repositories
 			user.Id = Guid.NewGuid().ToString();
 			user.Login = login;
 			user.Password = password;
+			context.Users.Add(user);
+			context.SaveChanges();
 			return GetUserInternal(login, password);
 		}
 
@@ -67,5 +74,17 @@ namespace CbIntegrator.Bussynes.Repositories
 			user.Login = users.Login;
 			return user;
 		}
+		private List<string> GetUserCurseInternal(string login)
+        {
+			//TODO: внешний ключ добавить и запрос сделать
+			using var context = new CbIntegratorDbContextFactory().CreateDbContext(null);
+			var res = context.UsersCurse.Where(p => p.UsersTable.Login == login).ToList();
+			var curs = new List<string>();
+			foreach(var d in res)
+            {
+				curs.Add(d.CurseName);
+            }
+			return curs;
+        }
 	}
 }

@@ -1,5 +1,6 @@
 ﻿using CbIntegrator.Bussynes.Services;
 using CbIntegrator.UI.Engine;
+using CbIntegrator.Bussynes.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -32,6 +33,7 @@ namespace CbIntegrator.UI.Froms
 
 			if(user != null)
 			{
+				CurrentUser.Login = user.Login;
 				var form = mainFormFactory.Create();
 				form.Show();
 				this.Close();

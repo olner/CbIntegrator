@@ -8,7 +8,7 @@ namespace CbIntegrator.DbContexts
 
 		public DbSet<Currency> Currencies { get; set; }
 
-		public DbSet<UsersCurse> UsersCurses { get; set; }
+		public DbSet<UsersCurse> UsersCurse { get; set; }
 
 
 		public CbIntegratorDbContext(DbContextOptions<CbIntegratorDbContext> connection) : base(connection) { }

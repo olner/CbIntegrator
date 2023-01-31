@@ -24,20 +24,11 @@ namespace CbIntegrator.UI
 		{
 			provider = GetProvider();
 			context = provider.GetRequiredService<ApplicationContext>();
-			//mainFactory = new MainFormFactory(context);
-			
-
-			/*var dbOptions = new DbOptions { ConnectionString = System.Configuration.ConfigurationManager.
-											ConnectionStrings["MySqLConnectionString"].ConnectionString };*/
-			//var service = new UsersService(new UsersRepository());
-			//registrationFactory = new RegistrationFormFactory(context, mainFactory, service);
-			
 
 			// To customize application configuration such as set high DPI settings or default font,
 			// see https://aka.ms/applicationconfiguration.
 			ApplicationConfiguration.Initialize();
-			
-			//var login = new LoginForm(mainFactory,registrationFactory, service);
+
 			context.MainForm = provider.GetRequiredService<LoginForm>();
 			Application.Run(context);
 
@@ -57,7 +48,8 @@ namespace CbIntegrator.UI
 			services.AddTransient<MainForm>(sp =>
 			{
 				var cbService = sp.GetRequiredService<ICbDataService>();
-				return new MainForm();
+				var repository = sp.GetRequiredService<IUsersRepository>();
+				return new MainForm(repository);
 			});
 			services.AddTransient<RegistrationForm>(sp =>
 			{

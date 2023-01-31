@@ -12,5 +12,7 @@ namespace CbIntegrator.DbContexts
 		public string Password { get; set; }
 		public string Login { get; set; }
 
+		public ICollection<UsersCurse> usersCurses { get; set; }
+
 	}
 }

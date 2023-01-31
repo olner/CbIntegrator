@@ -30,8 +30,11 @@
 		{
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.courseTabPage = new System.Windows.Forms.TabPage();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.settingsTabPage = new System.Windows.Forms.TabPage();
+            this.ClearBtn = new System.Windows.Forms.Button();
+            this.selectAllBtn = new System.Windows.Forms.Button();
             this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.tabControl1.SuspendLayout();
             this.courseTabPage.SuspendLayout();
@@ -51,6 +54,7 @@
             // 
             // courseTabPage
             // 
+            this.courseTabPage.Controls.Add(this.listBox1);
             this.courseTabPage.Controls.Add(this.dataGridView1);
             this.courseTabPage.Location = new System.Drawing.Point(4, 29);
             this.courseTabPage.Name = "courseTabPage";
@@ -60,6 +64,15 @@
             this.courseTabPage.Text = "Курс";
             this.courseTabPage.UseVisualStyleBackColor = true;
             // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 20;
+            this.listBox1.Location = new System.Drawing.Point(6, 408);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(150, 64);
+            this.listBox1.TabIndex = 3;
+            // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -67,11 +80,13 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 29;
-            this.dataGridView1.Size = new System.Drawing.Size(762, 377);
+            this.dataGridView1.Size = new System.Drawing.Size(878, 377);
             this.dataGridView1.TabIndex = 0;
             // 
             // settingsTabPage
             // 
+            this.settingsTabPage.Controls.Add(this.ClearBtn);
+            this.settingsTabPage.Controls.Add(this.selectAllBtn);
             this.settingsTabPage.Controls.Add(this.checkedListBox1);
             this.settingsTabPage.Location = new System.Drawing.Point(4, 29);
             this.settingsTabPage.Name = "settingsTabPage";
@@ -81,13 +96,33 @@
             this.settingsTabPage.Text = "Настройки";
             this.settingsTabPage.UseVisualStyleBackColor = true;
             // 
+            // ClearBtn
+            // 
+            this.ClearBtn.Location = new System.Drawing.Point(756, 6);
+            this.ClearBtn.Name = "ClearBtn";
+            this.ClearBtn.Size = new System.Drawing.Size(128, 35);
+            this.ClearBtn.TabIndex = 2;
+            this.ClearBtn.Text = "Очистить все";
+            this.ClearBtn.UseVisualStyleBackColor = true;
+            // 
+            // selectAllBtn
+            // 
+            this.selectAllBtn.Location = new System.Drawing.Point(6, 6);
+            this.selectAllBtn.Name = "selectAllBtn";
+            this.selectAllBtn.Size = new System.Drawing.Size(124, 35);
+            this.selectAllBtn.TabIndex = 1;
+            this.selectAllBtn.Text = "Выбрать все";
+            this.selectAllBtn.UseVisualStyleBackColor = true;
+            // 
             // checkedListBox1
             // 
+            this.checkedListBox1.CheckOnClick = true;
             this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Location = new System.Drawing.Point(0, 3);
+            this.checkedListBox1.Location = new System.Drawing.Point(0, 47);
             this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(756, 334);
+            this.checkedListBox1.Size = new System.Drawing.Size(887, 422);
             this.checkedListBox1.TabIndex = 0;
+            this.checkedListBox1.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBox1_ItemCheck);
             // 
             // MainForm
             // 
@@ -113,5 +148,8 @@
         private TabPage settingsTabPage;
         private DataGridView dataGridView1;
         private CheckedListBox checkedListBox1;
+        private ListBox listBox1;
+        private Button ClearBtn;
+        private Button selectAllBtn;
     }
 }
