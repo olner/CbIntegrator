@@ -21,7 +21,7 @@ namespace CbIntegrator.UI
             this.repository = repository;
             this.service = service;
         }
-
+        
         private void MainForm_Load(object sender, EventArgs e)
         {
             curs = service.GetTodayCurs();
