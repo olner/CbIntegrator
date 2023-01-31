@@ -38,6 +38,14 @@ namespace CbIntegrator.Bussynes.Repositories
         {
 			return GetUserCurseInternal(login);
         }
+		public void AddUserCurs(string login, string curseName)
+        {
+			AddUserCursInternal(login, curseName);
+        }
+		public void DeleteUserCurs(string login,string curseName)
+        {
+			DeleteUserCursInternal(login, curseName);
+        }
 
 		private User RegisterInternal(string login, string password)
 		{
@@ -76,7 +84,6 @@ namespace CbIntegrator.Bussynes.Repositories
 		}
 		private List<string> GetUserCurseInternal(string login)
         {
-			//TODO: внешний ключ добавить и запрос сделать
 			using var context = new CbIntegratorDbContextFactory().CreateDbContext(null);
 			var res = context.UsersCurse.Where(p => p.UsersTable.Login == login).ToList();
 			var curs = new List<string>();
@@ -86,5 +93,22 @@ namespace CbIntegrator.Bussynes.Repositories
             }
 			return curs;
         }
+		private void AddUserCursInternal(string login,string curseName)
+        {
+			using var context = new CbIntegratorDbContextFactory().CreateDbContext(null);
+			UsersCurse usersCurse = new UsersCurse();
+			usersCurse.UserId = context.Users.Where(p => p.Login == login).Select(p => p.Id).FirstOrDefault();
+			usersCurse.CurseName = curseName;
+			context.UsersCurse.Add(usersCurse);
+			context.SaveChanges();
+		}
+		private void DeleteUserCursInternal(string login,string curseName)
+        {
+			using var context = new CbIntegratorDbContextFactory().CreateDbContext(null);
+			var id = context.Users.Where(p => p.Login == login).Select(p => p.Id).FirstOrDefault();
+			var curs = context.UsersCurse.Where(p => p.UserId == id && p.CurseName.Replace(" ","") == curseName.Replace(" ","")).FirstOrDefault();
+			context.UsersCurse.Remove(curs);
+			context.SaveChanges();
+		}
 	}
 }

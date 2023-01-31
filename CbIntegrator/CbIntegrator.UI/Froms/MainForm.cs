@@ -13,6 +13,7 @@ namespace CbIntegrator.UI
         private readonly CbDataService service = new();
         private readonly IUsersRepository repository;
         DataTable curs = new();
+        bool dontRunHandler = true;
         private List<string> settings;
 
         public MainForm(IUsersRepository repository)
@@ -27,7 +28,6 @@ namespace CbIntegrator.UI
             //var tables = DataTableExtentions.SplitTable(curs,10);
             if (curs != null)
             {
-
                 SetSettings();
                 SetDataGrid(curs);
             }
@@ -35,13 +35,25 @@ namespace CbIntegrator.UI
             {
                 MessageBox.Show("Ошибка подключения к веб серивису");
             }
+
         }
 
         private void checkedListBox1_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             this.BeginInvoke((MethodInvoker)delegate
             {
-                SetDataGrid(curs);
+                if (dontRunHandler) return;
+                if (e.NewValue == CheckState.Checked) {
+                    SetDataGrid(curs);
+                    var items = checkedListBox1.Items;
+                    repository.AddUserCurs(CurrentUser.Login, items[e.Index].ToString());
+                }
+                else
+                {
+                    SetDataGrid(curs);
+                    var items = checkedListBox1.Items;
+                    repository.DeleteUserCurs(CurrentUser.Login, items[e.Index].ToString());
+                }
             });
 
         }
@@ -71,7 +83,7 @@ namespace CbIntegrator.UI
             checkedListBox1.Items.Clear();
             var userCurses = repository.GetUserCurse(CurrentUser.Login);
             var check = false;
-            //TODO: Боже какое пиво
+            //Боже какое пиво
             if (userCurses != null)
             {
                 for (var i = 0; i < curs.Rows.Count; i++)
@@ -98,6 +110,11 @@ namespace CbIntegrator.UI
                     checkedListBox1.Items.Add(curs.Rows[i][0].ToString());
                 }
             }
+        }
+
+        private void tabControl1_Selecting(object sender, TabControlCancelEventArgs e)
+        {
+            dontRunHandler = false;
         }
     }
 }
