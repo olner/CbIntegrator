@@ -1,19 +1,14 @@
-using CbIntegrator.Bussynes.Options;
 using CbIntegrator.Bussynes.Repositories;
 using CbIntegrator.Bussynes.Services;
 using CbIntegrator.UI.Engine;
 using CbIntegrator.UI.Froms;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using CbIntegrator.DbContexts;
 
 namespace CbIntegrator.UI
 {
-	internal static class Program
+    internal static class Program
 	{
 		private static IServiceProvider provider;
-		static MainFormFactory mainFactory;
-		static RegistrationFormFactory registrationFactory;
 		static ApplicationContext context;
 
 		/// <summary>

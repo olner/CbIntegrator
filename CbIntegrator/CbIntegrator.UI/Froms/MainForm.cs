@@ -1,9 +1,8 @@
 using CbIntegrator.Bussynes.Services;
 using CbIntegrator.Bussynes.Models;
-using CbIntegrator.UI.Froms;
 using System.Data;
-using CbIntegrator.Bussynes.Tools;
 using CbIntegrator.Bussynes.Repositories;
+using CbIntegrator.UI.Tools;
 
 namespace CbIntegrator.UI
 {
@@ -56,7 +55,6 @@ namespace CbIntegrator.UI
                     repository.DeleteUserCurs(CurrentUser.Login, items[e.Index].ToString());
                 }
             });
-
         }
         private void SetDataGrid(DataTable curs)
         {
@@ -82,35 +80,13 @@ namespace CbIntegrator.UI
         private void SetSettings()
         {
             checkedListBox1.Items.Clear();
-            var userCurses = repository.GetUserCurse(CurrentUser.Login);
-            var check = false;
-            //Боже какое пиво
-            if (userCurses != null)
+            var checkBox = CheckedListBoxExtensions.SetSettings(repository, curs);
+            foreach(var item in checkBox.Items)
             {
-                for (var i = 0; i < curs.Rows.Count; i++)
-                {
-                    foreach (var userCurs in userCurses)
-                    {
-                        if (userCurs.Replace(" ", "") == curs.Rows[i][0].ToString().Replace(" ", ""))
-                        {
-                            checkedListBox1.Items.Add(curs.Rows[i][0].ToString(), CheckState.Checked);
-                            check = true;
-                        }
-                    }
-                    if (check == false)
-                    {
-                        checkedListBox1.Items.Add(curs.Rows[i][0].ToString());
-                    }
-                    check = false;
-                }
+                checkedListBox1.Items.Add(item);
             }
-            else
-            {
-                for (var i = 0; i < curs.Rows.Count; i++)
-                {
-                    checkedListBox1.Items.Add(curs.Rows[i][0].ToString());
-                }
-            }
+            for (int i = 0; i < checkBox.Items.Count; i++)
+                checkedListBox1.SetItemChecked(i, checkBox.GetItemChecked(i));
         }
 
         private void tabControl1_Selecting(object sender, TabControlCancelEventArgs e)
