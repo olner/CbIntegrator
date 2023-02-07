@@ -83,7 +83,19 @@ namespace CbIntegrator.Bussynes.Tools
             }
             else
             {
-                tables.Add(originalTable);
+                foreach (var item in items)
+                {
+                    foreach (DataRow row in originalTable.Rows)
+                    {
+                        if (item == row[0])
+                        {
+                            DataRow newRow = newDt.NewRow();
+                            newRow.ItemArray = row.ItemArray;
+                            newDt.Rows.Add(newRow);
+                        }
+                    }
+                }
+                tables.Add(newDt);
             }
             return tables;
         }
