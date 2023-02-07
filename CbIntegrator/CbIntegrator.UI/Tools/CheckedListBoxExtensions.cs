@@ -39,5 +39,6 @@ namespace CbIntegrator.UI.Tools
             }
             return checkBox;
         }
+
     }
 }
