@@ -15,7 +15,6 @@ namespace CbIntegrator.UI
         DataTable curs = new();
         List<DataTable> tables = new();
         bool dontRunHandler = true;
-        private int pages;
 
         public MainForm(IUsersRepository repository,ICbDataService service)
         {
@@ -26,21 +25,23 @@ namespace CbIntegrator.UI
         
         private void MainForm_Load(object sender, EventArgs e)
         {
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.AutoGenerateColumns = true;
             curs = service.GetTodayCurs();
-            pages = tables.Count;
             if (curs != null)
             {
                 SetSettings();
-                tables = DataTableExtentions.SplitTable(curs, 10,SelectedItems());
+                tables = DataTableExtentions.SplitTable(curs, 10,GetSelectedItemsName());
                 SetPagination();
-                SetDataGrid(tables[0]);
+                //SetDataGrid(tables[0]);
+                dataGridView1.DataSource = tables[0];
             }
             else
             {
                 MessageBox.Show("Ошибка подключения к веб серивису");
             }
         }
-        private List<string> SelectedItems()
+        private List<string> GetSelectedItemsName()
         {
             List<string> items = new();
             foreach(var item in checkedListBox1.CheckedItems)
@@ -57,43 +58,26 @@ namespace CbIntegrator.UI
                 if (dontRunHandler) return;
                 if (e.NewValue == CheckState.Checked)
                 {
-                    tables = DataTableExtentions.SplitTable(curs, 10, SelectedItems());
-                    SetDataGrid(tables[listBox1.SelectedIndex]);
-                    SetPagination();
+                    ValueRefresh();
                     var items = checkedListBox1.Items;
                     repository.AddUserCurs(CurrentUser.Login, items[e.Index].ToString());
                 }
                 else
                 {
-                    tables = DataTableExtentions.SplitTable(curs, 10, SelectedItems());
-                    SetDataGrid(tables[listBox1.SelectedIndex]);
-                    SetPagination();
+                    ValueRefresh();
                     var items = checkedListBox1.Items;
                     repository.DeleteUserCurs(CurrentUser.Login, items[e.Index].ToString());
                 }
             });
         }
-        private void SetDataGrid(DataTable curs)
+        private void ValueRefresh()
         {
-            DataTable newDt = curs.Clone();
-            newDt.TableName = "Table";
-            newDt.Clear();
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridView1.AutoGenerateColumns = true;
-            foreach (var a in checkedListBox1.CheckedItems)
-            {
-                foreach (DataRow row in curs.Rows)
-                {
-                    if (a == row[0])
-                    {
-                         DataRow newRow = newDt.NewRow();
-                            newRow.ItemArray = row.ItemArray;
-                            newDt.Rows.Add(newRow);
-                    }
-                }
-            }
-            dataGridView1.DataSource = newDt;
+            tables = DataTableExtentions.SplitTable(curs, 10, GetSelectedItemsName());
+            //SetDataGrid(tables[listBox1.SelectedIndex]);
+            dataGridView1.DataSource = tables[listBox1.SelectedIndex];
+            SetPagination();
         }
+    
         private void SetSettings()
         {
             checkedListBox1.Items.Clear();
@@ -121,7 +105,7 @@ namespace CbIntegrator.UI
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SetDataGrid(tables[listBox1.SelectedIndex]);
+            dataGridView1.DataSource = tables[listBox1.SelectedIndex];
         }
     }
 }
