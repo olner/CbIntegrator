@@ -106,6 +106,7 @@
             this.ClearBtn.TabIndex = 2;
             this.ClearBtn.Text = "Очистить все";
             this.ClearBtn.UseVisualStyleBackColor = true;
+            this.ClearBtn.Click += new System.EventHandler(this.ClearBtn_Click);
             // 
             // selectAllBtn
             // 
@@ -115,6 +116,7 @@
             this.selectAllBtn.TabIndex = 1;
             this.selectAllBtn.Text = "Выбрать все";
             this.selectAllBtn.UseVisualStyleBackColor = true;
+            this.selectAllBtn.Click += new System.EventHandler(this.selectAllBtn_Click);
             // 
             // checkedListBox1
             // 

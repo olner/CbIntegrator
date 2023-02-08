@@ -33,7 +33,6 @@ namespace CbIntegrator.UI
                 SetSettings();
                 tables = DataTableExtentions.SplitTable(curs, 10,GetSelectedItemsName());
                 SetPagination();
-                //SetDataGrid(tables[0]);
                 dataGridView1.DataSource = tables[0];
             }
             else
@@ -73,7 +72,6 @@ namespace CbIntegrator.UI
         private void ValueRefresh()
         {
             tables = DataTableExtentions.SplitTable(curs, 10, GetSelectedItemsName());
-            //SetDataGrid(tables[listBox1.SelectedIndex]);
             dataGridView1.DataSource = tables[listBox1.SelectedIndex];
             SetPagination();
         }
@@ -106,6 +104,18 @@ namespace CbIntegrator.UI
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             dataGridView1.DataSource = tables[listBox1.SelectedIndex];
+        }
+
+        private void selectAllBtn_Click(object sender, EventArgs e)
+        {
+            for (int i = 1; i < checkedListBox1.Items.Count; i++)
+                checkedListBox1.SetItemChecked(i, true);
+        }
+
+        private void ClearBtn_Click(object sender, EventArgs e)
+        {
+            for (int i = 1; i < checkedListBox1.Items.Count; i++)
+                checkedListBox1.SetItemChecked(i, false);
         }
     }
 }
