@@ -108,13 +108,13 @@ namespace CbIntegrator.UI
 
         private void selectAllBtn_Click(object sender, EventArgs e)
         {
-            for (int i = 1; i < checkedListBox1.Items.Count; i++)
+            for (int i = 0; i < checkedListBox1.Items.Count; i++)
                 checkedListBox1.SetItemChecked(i, true);
         }
 
         private void ClearBtn_Click(object sender, EventArgs e)
         {
-            for (int i = 1; i < checkedListBox1.Items.Count; i++)
+            for (int i = 0; i < checkedListBox1.Items.Count; i++)
                 checkedListBox1.SetItemChecked(i, false);
         }
     }
